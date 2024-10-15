@@ -1,0 +1,66 @@
+/* BASICS */
+
+body {
+    margin: 40px auto;
+    max-width: 750px;
+    line-height: 1.6;
+    color: #444;
+    padding: 0 10px;
+}
+
+
+/* TEXT */
+
+h1, h2, h3 {
+    line-height: 1.2;
+		font-family: Verdana, Helvetica, sans-serif;
+}
+
+p {
+	font-family: Verdana, Helvetica, sans-serif;
+}
+
+li {
+	font-family: Verdana, Helvetica, sans-serif;
+}
+
+a {
+    text-decoration: none; /* Removes underline from all links */
+		color: blue
+}
+
+.monospace {
+	font-family: Courier, monospace;
+}
+
+
+/* HORIZONTAL LISTS */
+
+.horizontal-list {
+    display: flex;         /* Use flexbox for horizontal alignment */
+    list-style-type: none; /* Remove default list styling */
+    padding: 0;            /* Remove default padding */
+    margin: 0;             /* Remove default margin */
+}
+
+.horizontal-list li {
+    margin-right: 15px;    /* Space between items */
+}
+
+.horizontal-list li:last-child {
+    margin-right: 0;       /* Remove margin from the last item */
+}
+
+
+/* BLOG HOMEPAGE */
+
+.blog-date {
+	font-family: Courier, monospace;
+}
+
+#blog-list li {
+	display: flex; /* Use flexbox to arrange children side by side */
+	gap: 40px; /* Adjust the gap between the divs */
+}
+
+
