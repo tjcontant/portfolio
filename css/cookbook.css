@@ -21,13 +21,13 @@ a {
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 	margin-bottom: 20px;
-	text-align: justify;
 }
 
 ul {
 	list-style-type: disc;
 }
 
-ol li {
+.instructions li {
 	padding-bottom: 10px; 
+	text-align: justify;
 }
