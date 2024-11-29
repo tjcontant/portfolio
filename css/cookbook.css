@@ -17,12 +17,17 @@ a {
 .ingredients, .instructions {
 	background-color: #ffffff;
 	padding: 15px;
+	padding-right: 30px;
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 	margin-bottom: 20px;
+	text-align: justify;
 }
 
 ul {
 	list-style-type: disc;
-	padding-left: 20px;
+}
+
+ol li {
+	padding-bottom: 10px; 
 }
