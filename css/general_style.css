@@ -24,10 +24,12 @@ header {
 h1, h2, h3 {
   line-height: 1.2;
 	font-family: Verdana, Helvetica, sans-serif;
+  font-size: 1.5rem;
 }
 
 p {
 	font-family: Verdana, Helvetica, sans-serif;
+  font-size: 1rem;
 }
 
 li, td {
@@ -41,7 +43,7 @@ a {
 
 .monospace {
 	font-family: Courier, monospace;
-  font-size: 16px
+  font-size: 1rem;
 }
 
 
@@ -55,7 +57,7 @@ a {
 }
 
 .horizontal-list li {
-  margin-right: 15px; /* Space between items */
+  margin-right: 1rem; /* Space between items */
 }
 
 .horizontal-list li:last-child {
@@ -69,4 +71,40 @@ a {
   padding: 0 20px 0 0;
 }
 
+/* RESPONSIVE MEDIA QUERY */
+@media screen and (max-width: 600px) {
+  body {
+    padding: 10px; /* Reduce padding for small screens */
+    max-width: 100%; /* Allow the content to use the full width */
+  }
 
+  #title {
+    font-size: 1.8rem; /* Slightly smaller title on small screens */
+  }
+
+  h1, h2, h3 {
+    font-size: 1.2rem; /* Adjust header sizes for smaller screens */
+  }
+
+  p, li, td {
+    font-size: 1rem; /* Keep text size consistent and readable */
+  }
+
+  .monospace {
+    font-size: 0.9rem; /* Adjust monospace text slightly */
+  }
+
+  .horizontal-list {
+    flex-direction: column; /* Stack nav links vertically on small screens */
+    align-items: center; /* Center align items */
+  }
+
+  .horizontal-list li {
+    margin-right: 0;
+    margin-bottom: 10px; /* Space between items when stacked */
+  }
+
+  .horizontal-list li:last-child {
+    margin-bottom: 0; /* Remove margin from the last item */
+  }
+}
