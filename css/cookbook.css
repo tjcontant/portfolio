@@ -21,13 +21,18 @@ a {
 	border-radius: 5px;
 	box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 	margin-bottom: 20px;
+	text-align: justify;
 }
 
 ul {
 	list-style-type: disc;
 }
 
-.instructions li {
-	padding-bottom: 10px; 
-	text-align: justify;
+.instructions li:not(:last-child) {
+    margin-bottom: 12px; /* Apply margin to all list items except the last */
+    padding-bottom: 0; /* No bottom padding on each list item */
+}
+
+.ingredients h3, .instructions h3 {
+	padding-left: 15px;
 }
