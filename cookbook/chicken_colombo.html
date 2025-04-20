@@ -1,59 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Contant Cookbook</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/general_style.css">
-    <link rel="stylesheet" type="text/css" href="../css/cookbook.css">	
+  <meta charset="UTF-8">
+  <title>Contant Cookbook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../css/general_style.css">
+  <link rel="stylesheet" type="text/css" href="../css/cookbook.css">
 </head>
 <body>
-	<header>
-		<div id="title">Contant Cookbook</div>
-		<ul class="horizontal-list" id="nav-bar">
-			<li><a href="../index.html">Home</a></li>
-			<li><a href="../cookbook.html">Cookbook</a></li>
-		</ul>			
-	</header>
   <header>
-    <h1>Chicken Colombo</h1>
+    <div id="title">Contant Cookbook</div>
+    <ul class="horizontal-list" id="nav-bar">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../cookbook.html">Cookbook</a></li>
+    </ul>
   </header>
+
   <main>
-      <p><em>Servings: 4</em></p>
+    <h1>Chicken Colombo</h1>
 
-      <h2>Ingredients</h2>
-      <div class="ingredients">
-          <ul>
-						<li>1 1/4 cup rice</li>
-						<li>2 Tbsp. olive oil</li>
-						<li>1 small onion, finely chopped</li>
-						<li>2 cloves garlic, finely chopped</li>
-						<li>14 oz. peeled chopped tomatoes</li>
-						<li>2 boneless, skinless chicken breast halves</li>
-						<li>2 Tbsp. curry powder</li>
-						<li>Salt and ground pepper</li>
-						<li>1/2 cup coconut milk</li>
-						<li>2 pinches ground cinnamon</li>
-						<li>Cilantro for garnish</li>
-          </ul>
-      </div>
+    <label>
+      Servings:
+      <span id="servingCount">4</span>
+      <input type="range" id="servingSlider" min="1" max="20" value="4">
+    </label>
 
-      <h2>Instructions</h2>
-      <div class="instructions">
-          <ol>
-						<li>Cook rice on stove or in a rice cooker.</li>
-						<li>Heat oil in a large skillet over medium-high heat. Add onions and garlic and cook, stirring, until golden brown.</li>
-            <li>Add tomatoes, chicken, and sprinkle over curry powder. Season with salt and pepper. Reduce heat to low and cook. Stir until the mixture has thickened and the chicken is cooked through.</li>
-            <li>Add coconut milk and stir until well combined. Cook 5 minutes more. Sprinkle over cinnamon.</li>
-						<li>Serve the chicken mixture on top of the rice. Garnish with cilantro.</li>
-          </ol>
-      </div>
+    <h2>Ingredients</h2>
+    <div class="ingredients">
+      <ul id="ingredientList"></ul>
+    </div>
 
-      <h2>Notes</h2>
+    <h2>Instructions</h2>
+    <div class="instructions">
+      <ol>
+        <li>Cook rice on stove or in a rice cooker.</li>
+        <li>Heat oil in a large skillet over medium-high heat. Add onions and garlic and cook, stirring, until golden brown.</li>
+        <li>Add tomatoes, chicken, and sprinkle over curry powder. Season with salt and pepper. Reduce heat to low and cook. Stir until the mixture has thickened and the chicken is cooked through.</li>
+        <li>Add coconut milk and stir until well combined. Cook 5 minutes more. Sprinkle over cinnamon.</li>
+        <li>Serve the chicken mixture on top of the rice. Garnish with cilantro.</li>
+      </ol>
+    </div>
 
-			<p>Colombo is a Creole curry from the French West Indies and is similiar to Indian curry. It originates from Sri Lanka and was brought to the French Caribbean by Indian immigrants who came during the 19th and 20th centuries to work on sugar plantations.</p>
+    <h2>Notes</h2>
+    <p>
+      Colombo is a Creole curry from the French West Indies and is similar to Indian curry.
+      It originates from Sri Lanka and was brought to the French Caribbean by Indian immigrants
+      who came during the 19th and 20th centuries to work on sugar plantations.
+    </p>
+  </main>
 
-    </main>
+  <script>
+    const baseServings = 4;
+    const slider = document.getElementById('servingSlider');
+    const servingCount = document.getElementById('servingCount');
+    const ingredientList = document.getElementById('ingredientList');
 
+    const ingredients = [
+      { name: 'rice', quantity: 1.25, unit: 'cup' },
+      { name: 'olive oil', quantity: 2, unit: 'Tbsp' },
+      { name: 'small onion, finely chopped', quantity: 1, unit: '' },
+      { name: 'cloves garlic, finely chopped', quantity: 2, unit: '' },
+      { name: 'peeled chopped tomatoes', quantity: 14, unit: 'oz' },
+      { name: 'boneless, skinless chicken breast halves', quantity: 2, unit: '' },
+      { name: 'curry powder', quantity: 2, unit: 'Tbsp' },
+      { name: 'Salt and ground pepper', quantity: null, unit: '' },
+      { name: 'coconut milk', quantity: 0.5, unit: 'cup' },
+      { name: 'ground cinnamon', quantity: 2, unit: 'pinches' },
+      { name: 'Cilantro for garnish', quantity: null, unit: '' }
+    ];
+
+    function formatQuantity(qty) {
+      if (qty == null) return '';
+      const fixed = Number(qty).toFixed(2);
+      return fixed.replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
+    }
+
+    function renderIngredients(servings) {
+      ingredientList.innerHTML = '';
+
+      const unitsWithPeriods = ['oz', 'Tbsp', 'tsp']; // 'cup' intentionally left out
+
+      ingredients.forEach(item => {
+        const scaledQty = item.quantity !== null
+          ? formatQuantity(item.quantity * servings / baseServings)
+          : '';
+
+        const unitDisplay = item.unit
+          ? `${scaledQty} ${item.unit}${unitsWithPeriods.includes(item.unit) ? '.' : ''} `
+          : scaledQty ? `${scaledQty} ` : '';
+
+        const listItem = document.createElement('li');
+        listItem.textContent = `${scaledQty ? unitDisplay : ''}${item.name}`;
+        ingredientList.appendChild(listItem);
+      });
+    }
+
+    slider.value = baseServings;
+    servingCount.textContent = baseServings;
+    renderIngredients(baseServings);
+
+    slider.addEventListener('input', function () {
+      const currentServings = parseInt(this.value);
+      servingCount.textContent = currentServings;
+      renderIngredients(currentServings);
+    });
+  </script>
 </body>
 </html>

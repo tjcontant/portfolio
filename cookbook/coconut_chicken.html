@@ -19,45 +19,25 @@
     <h1>Coconut Chicken</h1>
   </header>
   <main>
-      <p><em>Servings: 4</em></p>
+      <label>
+        Servings:
+        <span id="servingCount">4</span>
+        <input type="range" id="servingSlider" min="1" max="20" value="4">
+      </label>
 
       <h2>Ingredients</h2>
       <div class="ingredients">
-				<h3>Sauce</h3>
-				<ul>
-					<li>13.5 oz. can coconut milk</li>
-					<li>2 tsp. cornstarch</li>
-					<li>1/4 cup Asian sweet chili sauce</li>
-					<li>1/4 cup honey</li>
-					<li>1/4 cup lime juice</li>
-					<li>1 Tbsp. (reduced) sodium soy sauce</li>
-					<li>1 Tbsp. Asian chili sauce, more or less to taste</li>
-					<li>1 tsp. dried basil</li>
-				</ul>
-				
-					<h3>Prepare Chicken</h3>
-          <ul>
-						<li>2 large chicken breasts</li>
-						<li>1/4 cup flour</li>
-						<li>1 tsp. salt</li>
-						<li>1/2 tsp. each ground ginger, garlic powder, ground coriander, turmeric powder, pepper</li>
-          </ul>
-					
-					<h3>Cook Chicken</h3>
-          <ul>
-						<li>2 Tbsp. butter</li>
-						<li>2 Tbsp. olive oil</li>
-						<li>2 green onions, chopped white and green parts separated</li>
-						<li>2 tsp. freshly grated ginger or 3/4 tsp. ground</li>
-						<li>4 garlic cloves, minced or 1 tsp. ground</li>
-          </ul>
-					
-					<h3>Serving</h3>
-          <ul>
-						<li>Rice</li>
+        <h3>Sauce</h3>
+        <ul id="sauceList"></ul>
 
-          </ul>
-					
+        <h3>Prepare Chicken</h3>
+        <ul id="prepareList"></ul>
+
+        <h3>Cook Chicken</h3>
+        <ul id="cookList"></ul>
+
+        <h3>Serving</h3>
+        <ul id="serveList"></ul>
       </div>
 
       <h2>Instructions</h2>
@@ -67,7 +47,7 @@
 						<li>Whisk the coconut sauce ingredients together, set aside.</li>
 						<li>Slice the chicken breasts in the half through the equator to create 4 fillets. Cover with plastic wrap and pound to an even thickness. Pat dry.</li>
 						<li>Whisk the flour and all chicken seasoning together in a shallow dish. Dredge each breast in the mixture, shake off any excess, then transfer to a dry surface.</li>
-						<li>Melt the 2 Tbsp. butter in 2 Tbsp. olive oil in a large skillet over medium-high heat. Once hot, add chicken and cook for 4-5 (depending on thickness) until golden and cooked through. Transfer chicken to a plate, don't wipe out skillet.</li>
+						<li>Melt the butter and olive oil in a large skillet over medium-high heat. Once hot, add chicken and cook for 4-5 (depending on thickness) until golden and cooked through. Transfer chicken to a plate, don't wipe out skillet.</li>
 						<li>Reduce heat to medium and add a drizzle of olive oil if needed. Add white parts of green onions and cook one minute. Add garlic and ginger and cook 30 seconds. Reduce heat to low and stir in the sauce, scraping up any brown bits on the bottom of the pan.</li>
 						<li>Bring to a simmer until sauce is thickened, 1-2 minutes. Add chicken and warm through. Garnish with cilantro and/or basil and green onions. Serve over rice.</li>
           </ol>
@@ -79,4 +59,88 @@
     </main>
 
 </body>
+
+<script>
+    const baseServings = 4;
+    const slider = document.getElementById('servingSlider');
+    const servingCount = document.getElementById('servingCount');
+
+    const sauceList = document.getElementById('sauceList');
+    const prepareList = document.getElementById('prepareList');
+    const cookList = document.getElementById('cookList');
+    const serveList = document.getElementById('serveList');
+
+    const ingredients = {
+      sauce: [
+        { name: 'can coconut milk', quantity: 13.5, unit: 'oz' },
+        { name: 'cornstarch', quantity: 2, unit: 'tsp' },
+        { name: 'Asian sweet chili sauce', quantity: 0.25, unit: 'cup' },
+        { name: 'honey', quantity: 0.25, unit: 'cup' },
+        { name: 'lime juice', quantity: 0.25, unit: 'cup' },
+        { name: 'soy sauce (reduced sodium)', quantity: 1, unit: 'Tbsp' },
+        { name: 'Asian chili sauce', quantity: 1, unit: 'Tbsp' },
+        { name: 'dried basil', quantity: 1, unit: 'tsp' }
+      ],
+      prepare: [
+        { name: 'large chicken breasts', quantity: 2, unit: '' },
+        { name: 'flour', quantity: 0.25, unit: 'cup' },
+        { name: 'salt', quantity: 1, unit: 'tsp' },
+        { name: 'ground ginger', quantity: 0.5, unit: 'tsp' },
+        { name: 'garlic powder', quantity: 0.5, unit: 'tsp' },
+        { name: 'ground coriander', quantity: 0.5, unit: 'tsp' },
+        { name: 'turmeric powder', quantity: 0.5, unit: 'tsp' },
+        { name: 'pepper', quantity: 0.5, unit: 'tsp' }
+      ],
+      cook: [
+        { name: 'butter', quantity: 2, unit: 'Tbsp' },
+        { name: 'olive oil', quantity: 2, unit: 'Tbsp' },
+        { name: 'green onions, chopped (white and green parts separated)', quantity: 2, unit: '' },
+        { name: 'freshly grated ginger or 3/4 tsp. ground', quantity: 2, unit: 'tsp' },
+        { name: 'garlic cloves, minced or 1 tsp. ground', quantity: 4, unit: '' }
+      ],
+      serve: [
+        { name: 'Rice', quantity: null, unit: '' }
+      ]
+    };
+
+    function formatQuantity(qty) {
+      if (qty == null) return '';
+      const fixed = Number(qty).toFixed(2);
+      return fixed.replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
+    }
+
+    function renderIngredientList(list, data, servings) {
+      list.innerHTML = '';
+      data.forEach(item => {
+        const scaledQty = item.quantity !== null
+          ? formatQuantity(item.quantity * servings / baseServings)
+          : '';
+        const unitsWithPeriods = ['oz', 'Tbsp', 'tsp'];
+        const unitDisplay = item.quantity !== null
+          ? `${scaledQty}${item.unit ? ' ' + item.unit : ''}${unitsWithPeriods.includes(item.unit) ? '.' : ''} `
+          : '';
+        const li = document.createElement('li');
+        li.textContent = `${scaledQty ? unitDisplay : ''}${item.name}`;
+        list.appendChild(li);
+      });
+    }
+
+    function renderAll(servings) {
+      servingCount.textContent = servings;
+      renderIngredientList(sauceList, ingredients.sauce, servings);
+      renderIngredientList(prepareList, ingredients.prepare, servings);
+      renderIngredientList(cookList, ingredients.cook, servings);
+      renderIngredientList(serveList, ingredients.serve, servings);
+    }
+
+    // Initial render
+    slider.value = baseServings;
+    renderAll(baseServings);
+
+    slider.addEventListener('input', function () {
+      const currentServings = parseInt(this.value);
+      renderAll(currentServings);
+    });
+  </script>
+
 </html>

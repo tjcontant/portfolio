@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contant Cookbook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/general_style.css">
+    <link rel="stylesheet" type="text/css" href="../css/cookbook.css">	
+</head>
+<body>
+	<header>
+		<div id="title">Contant Cookbook</div>
+		<ul class="horizontal-list" id="nav-bar">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../cookbook.html">Cookbook</a></li>
+		</ul>			
+	</header>
+
+	<main>
+		<h1>Cranberry Sauce</h1>
+
+		<label>
+			Servings:
+			<span id="servingCount">6</span>
+			<input type="range" id="servingSlider" min="1" max="20" value="6">
+		</label>
+
+		<h2>Ingredients</h2>
+		<div class="ingredients">
+			<ul id="ingredientList"></ul>
+		</div>
+
+		<h2>Instructions</h2>
+		<div class="instructions">
+			<ol>
+				<li>Combine sugars and liquids in a medium-sized saucepan over medium heat. Stir occasionally until sugars are dissolved and bring to a boil.</li>
+				<li>Add cranberries and return to a boil.</li>
+				<li>Reduce heat to a simmer and continue to cook cranberries, stirring occasionally, 10-15 minutes or until all or most berries have burst (careful, there is some splatter) and the mixture is slightly reduced.</li>
+				<li>Transfer mixture to a bowl and allow it to cool for at least 20 minutes at room temperature.</li>
+				<li>Cover and refrigerate for at least 2 hours before serving.</li>
+			</ol>
+		</div>
+
+		<h2>Notes</h2>
+		<p>Sauce lasts up to a week when refrigerated in an air-tight container.</p>
+	</main>
+
+	<script>
+		const baseServings = 6;
+		const slider = document.getElementById('servingSlider');
+		const servingCount = document.getElementById('servingCount');
+		const ingredientList = document.getElementById('ingredientList');
+
+		const ingredients = [
+			{ name: 'sugar', quantity: 0.67, unit: 'cup' },
+			{ name: 'brown sugar', quantity: 0.33, unit: 'cup' },
+			{ name: 'water', quantity: 0.33, unit: 'cup' },
+			{ name: 'orange juice', quantity: 0.67, unit: 'cup' },
+			{ name: 'cranberries', quantity: 12, unit: 'oz' }
+		];
+
+		function formatQuantity(qty) {
+			if (qty == null) return '';
+			const fixed = Number(qty).toFixed(2);
+			return fixed.replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
+		}
+
+		function renderIngredients(servings) {
+			ingredientList.innerHTML = '';
+
+			const unitsWithPeriods = ['oz', 'Tbsp', 'tsp']; // 'cup' intentionally left out
+
+			ingredients.forEach(item => {
+				const scaledQty = item.quantity !== null
+					? formatQuantity(item.quantity * servings / baseServings)
+					: '';
+
+				const unitDisplay = item.unit
+					? `${scaledQty} ${item.unit}${unitsWithPeriods.includes(item.unit) ? '.' : ''} `
+					: scaledQty ? `${scaledQty} ` : '';
+
+				const listItem = document.createElement('li');
+				listItem.textContent = `${scaledQty ? unitDisplay : ''}${item.name}`;
+				ingredientList.appendChild(listItem);
+			});
+		}
+
+		slider.value = baseServings;
+		servingCount.textContent = baseServings;
+		renderIngredients(baseServings);
+
+		slider.addEventListener('input', function () {
+			const currentServings = parseInt(this.value);
+			servingCount.textContent = currentServings;
+			renderIngredients(currentServings);
+		});
+	</script>
+</body>
+</html>

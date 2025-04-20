@@ -36,3 +36,33 @@ ul {
 .ingredients h3, .instructions h3 {
 	padding-left: 15px;
 }
+
+input[type="range"] {
+    -webkit-appearance: none; /* Remove default styling */
+    height: 6px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  /* WebKit (Chrome, Safari) */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background-color: #2980b9;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+  }
+
+  /* Firefox */
+  input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background-color: #2980b9;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+  }
