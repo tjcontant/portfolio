@@ -1,3 +1,12 @@
+/* FONTS */
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../fonts/Noto_Sans/NotoSans-VariableFont_wdth\,wght.ttf') format('truetype');
+  font-weight: 100 900;   /* range of weights included */
+  font-stretch: 75% 100%; /* range of widths included */
+  font-style: normal;
+}
+
 /* BASICS */
 
 body {
@@ -12,30 +21,26 @@ header {
   margin-bottom: 20px; /* Adds space below the header */
 }
 
-#title {
-  font-size: 24px;
-  font-family: Verdana, Helvetica, sans-serif;
-  font-weight: bold;
-}
-
 
 /* TEXT */
 
 h1, h2, h3 {
   line-height: 1.2;
-	font-family: Verdana, Helvetica, sans-serif;
+	font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
 }
 
 p {
-	font-family: Verdana, Helvetica, sans-serif;
+	font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
+  font-weight: 400;    /* normal */
+  font-stretch: 100%;  /* normal width */
 }
 
 label {
-  font-family: Verdana, Helvetica, sans-serif;
+  font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
 }
 
 li, td {
-	font-family: Verdana, Helvetica, sans-serif;
+	font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
 }
 
 a {
@@ -46,6 +51,12 @@ a {
 .monospace {
 	font-family: Courier, monospace;
   font-size: 16px
+}
+
+#title {
+  font-size: 24px;
+  font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
+  font-weight: bold;
 }
 
 
@@ -72,5 +83,4 @@ a {
 #blog-list td {
   padding: 0 20px 0 0;
 }
-
 
