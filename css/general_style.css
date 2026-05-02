@@ -2,8 +2,10 @@
 @font-face {
   font-family: 'Noto Sans';
   src: url('../fonts/Noto_Sans/NotoSans-VariableFont_wdth\,wght.ttf') format('truetype');
-  font-weight: 100 900;   /* range of weights included */
-  font-stretch: 75% 100%; /* range of widths included */
+  font-weight: 100 900;
+  /* range of weights included */
+  font-stretch: 75% 100%;
+  /* range of widths included */
   font-style: normal;
 }
 
@@ -18,38 +20,45 @@ body {
 }
 
 header {
-  margin-bottom: 20px; /* Adds space below the header */
+  margin-bottom: 20px;
+  /* Adds space below the header */
 }
 
 
 /* TEXT */
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   line-height: 1.2;
-	font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
+  font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
 }
 
 p {
-	font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
-  font-weight: 400;    /* normal */
-  font-stretch: 100%;  /* normal width */
+  font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
+  font-weight: 400;
+  /* normal */
+  font-stretch: 100%;
+  /* normal width */
 }
 
 label {
   font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
 }
 
-li, td {
-	font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
+li,
+td {
+  font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
 }
 
 a {
-  text-decoration: none; /* Removes underline from all links */
-	color: blue
+  text-decoration: none;
+  /* Removes underline from all links */
+  color: blue
 }
 
 .monospace {
-	font-family: Courier, monospace;
+  font-family: Courier, monospace;
   font-size: 16px
 }
 
@@ -63,18 +72,24 @@ a {
 /* HORIZONTAL LISTS */
 
 .horizontal-list {
-  display: flex; /* Use flexbox for horizontal alignment */
-  list-style-type: none; /* Remove default list styling */
-  padding: 0; /* Remove default padding */
-  margin: 0; /* Remove default margin */
+  display: flex;
+  /* Use flexbox for horizontal alignment */
+  list-style-type: none;
+  /* Remove default list styling */
+  padding: 0;
+  /* Remove default padding */
+  margin: 0;
+  /* Remove default margin */
 }
 
 .horizontal-list li {
-  margin-right: 15px; /* Space between items */
+  margin-right: 15px;
+  /* Space between items */
 }
 
 .horizontal-list li:last-child {
-  margin-right: 0; /* Remove margin from the last item */
+  margin-right: 0;
+  /* Remove margin from the last item */
 }
 
 
@@ -84,3 +99,32 @@ a {
   padding: 0 20px 0 0;
 }
 
+
+/* BOXES */
+#cv-section {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.cv-box {
+  display: inline-block;
+  padding: 15px 25px;
+  border: 2px solid #000;
+  font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.cv-box:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.cv-updated {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #555;
+  font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
+}
