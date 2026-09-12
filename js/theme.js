@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function updateToggle() {
     const dark = isDark();
-    toggle.textContent = dark ? '☀️' : '🌙';
+    toggle.textContent = dark ? 'Light' : 'Dark';
     toggle.setAttribute('aria-pressed', String(dark));
     toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
   }
