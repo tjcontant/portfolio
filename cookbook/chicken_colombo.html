@@ -2,14 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Contant Cookbook</title>
+  <title>Chicken Colombo – Contant Cookbook</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../css/general_style.css">
   <link rel="stylesheet" type="text/css" href="../css/cookbook.css">
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('cookbook-theme') === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <header>
-    <div id="title">Contant Cookbook</div>
+    <div class="header-top">
+      <div id="title">Contant Cookbook</div>
+      <button type="button" id="darkModeToggle" class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+    </div>
     <ul class="horizontal-list" id="nav-bar">
       <li><a href="../index.html">Home</a></li>
       <li><a href="../cookbook.html">Cookbook</a></li>
@@ -19,9 +31,9 @@
   <main>
     <h1>Chicken Colombo</h1>
 
-    <label>
+    <label id="servingsLabel" hidden>
       Servings:
-      <span id="servingCount">4</span>
+      <span id="servingCount"></span>
       <input type="range" id="servingSlider" min="1" max="20" value="4">
     </label>
 
@@ -49,60 +61,29 @@
     </p>
   </main>
 
+  <script src="../js/theme.js"></script>
+  <script src="../js/recipe.js"></script>
   <script>
-    const baseServings = 4;
-    const slider = document.getElementById('servingSlider');
-    const servingCount = document.getElementById('servingCount');
-    const ingredientList = document.getElementById('ingredientList');
-
-    const ingredients = [
-      { name: 'rice', quantity: 1.25, unit: 'cup' },
-      { name: 'olive oil', quantity: 2, unit: 'Tbsp' },
-      { name: 'small onion, finely chopped', quantity: 1, unit: '' },
-      { name: 'cloves garlic, finely chopped', quantity: 2, unit: '' },
-      { name: 'peeled chopped tomatoes', quantity: 14, unit: 'oz' },
-      { name: 'boneless, skinless chicken breast halves', quantity: 2, unit: '' },
-      { name: 'curry powder', quantity: 2, unit: 'Tbsp' },
-      { name: 'Salt and ground pepper', quantity: null, unit: '' },
-      { name: 'coconut milk', quantity: 0.5, unit: 'cup' },
-      { name: 'ground cinnamon', quantity: 2, unit: 'pinches' },
-      { name: 'Cilantro for garnish', quantity: null, unit: '' }
-    ];
-
-    function formatQuantity(qty) {
-      if (qty == null) return '';
-      const fixed = Number(qty).toFixed(2);
-      return fixed.replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
-    }
-
-    function renderIngredients(servings) {
-      ingredientList.innerHTML = '';
-
-      const unitsWithPeriods = ['oz', 'Tbsp', 'tsp']; // 'cup' intentionally left out
-
-      ingredients.forEach(item => {
-        const scaledQty = item.quantity !== null
-          ? formatQuantity(item.quantity * servings / baseServings)
-          : '';
-
-        const unitDisplay = item.unit
-          ? `${scaledQty} ${item.unit}${unitsWithPeriods.includes(item.unit) ? '.' : ''} `
-          : scaledQty ? `${scaledQty} ` : '';
-
-        const listItem = document.createElement('li');
-        listItem.textContent = `${scaledQty ? unitDisplay : ''}${item.name}`;
-        ingredientList.appendChild(listItem);
-      });
-    }
-
-    slider.value = baseServings;
-    servingCount.textContent = baseServings;
-    renderIngredients(baseServings);
-
-    slider.addEventListener('input', function () {
-      const currentServings = parseInt(this.value);
-      servingCount.textContent = currentServings;
-      renderIngredients(currentServings);
+    renderRecipe({
+      servings: { base: 4, min: 1, max: 20 },
+      sections: [
+        {
+          listId: 'ingredientList',
+          items: [
+            { name: 'rice', quantity: 1.25, unit: 'cup' },
+            { name: 'olive oil', quantity: 2, unit: 'Tbsp' },
+            { name: 'small onion, finely chopped', quantity: 1, unit: '' },
+            { name: 'cloves garlic, finely chopped', quantity: 2, unit: '' },
+            { name: 'peeled chopped tomatoes', quantity: 14, unit: 'oz' },
+            { name: 'boneless, skinless chicken breast halves', quantity: 2, unit: '' },
+            { name: 'curry powder', quantity: 2, unit: 'Tbsp' },
+            { name: 'Salt and ground pepper', quantity: null, unit: '' },
+            { name: 'coconut milk', quantity: 0.5, unit: 'cup' },
+            { name: 'ground cinnamon', quantity: 2, unit: 'pinches' },
+            { name: 'Cilantro for garnish', quantity: null, unit: '' }
+          ]
+        }
+      ]
     });
   </script>
 </body>
