@@ -6,11 +6,23 @@
 	<title>Tristan Contant</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="css/general_style.css">
+	<script>
+		(function () {
+			try {
+				if (localStorage.getItem('cookbook-theme') === 'dark') {
+					document.documentElement.setAttribute('data-theme', 'dark');
+				}
+			} catch (e) {}
+		})();
+	</script>
 </head>
 
 <body>
 	<header>
-		<div id="title">Tristan Contant</div>
+		<div class="header-top">
+			<div id="title">Tristan Contant</div>
+			<button type="button" id="darkModeToggle" class="theme-toggle" aria-label="Switch to dark mode">Dark</button>
+		</div>
 		<ul class="horizontal-list" id="nav-bar">
 			<li><a href="index.html">Home</a></li>
 			<li><a href="cookbook.html">Cookbook</a></li>
@@ -38,6 +50,8 @@
 		<h3>Contact</h3>
 		<div class="monospace">Tristan [dot] Contant [at] colostate [dot] edu</div>
 	</footer>
+
+	<script src="js/theme.js"></script>
 </body>
 
 </html>
