@@ -134,6 +134,10 @@ input[type="range"] {
 
 /* RECIPE CATEGORIES */
 
+.recipe-list td {
+	padding: 0 20px 0 0;
+}
+
 .recipe-categories .category {
 	break-inside: avoid;
 	page-break-inside: avoid;
