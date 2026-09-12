@@ -5,63 +5,99 @@
 		<title>Contant Cookbook</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="css/general_style.css">
-		<link rel="stylesheet" type="text/css" href="css/cookbook.css">		
+		<link rel="stylesheet" type="text/css" href="css/cookbook.css">
+		<script>
+			(function () {
+				try {
+					if (localStorage.getItem('cookbook-theme') === 'dark') {
+						document.documentElement.setAttribute('data-theme', 'dark');
+					}
+				} catch (e) {}
+			})();
+		</script>
 	</head>
 	<body>
 		<header>
-			<div id="title">Contant Cookbook</div>
+			<div class="header-top">
+				<div id="title">Contant Cookbook</div>
+				<button type="button" id="darkModeToggle" class="theme-toggle" aria-label="Switch to dark mode">🌙</button>
+			</div>
 			<ul class="horizontal-list" id="nav-bar">
 				<li><a href="index.html">Home</a></li>
 				<li><a href="cookbook.html">Cookbook</a></li>
-			</ul>			
+			</ul>
 		</header>
-		
+
 		<p>Food has always been an integral part of my family's identity. This website is a collection of our favorite recipes that bring us together around the table. Some are childhood classics, other recent hits.</p>
+
+		<div class="search-wrap">
+			<input
+				type="text"
+				id="recipeSearch"
+				placeholder="Search recipes…"
+				autocomplete="off"
+				role="combobox"
+				aria-expanded="false"
+				aria-controls="searchResults"
+				aria-autocomplete="list">
+			<ul id="searchResults" class="search-results" role="listbox" hidden></ul>
+		</div>
+
 		<p>Recipes are categorized to reflect how we approach cooking in our family. Many of them allow you to adjust the number of servings, but for recipes that require specific equipment (such as a 9x13 pan), the serving size is fixed. Dates are also provided that indicate when the recipe was uploaded to this website.</p>
-				
+
 		<hr>
 							
-		<section>
-			<h1>Thanksgiving</h1>
-			<table id="blog-list">
-				<tr>
-			  	<td class="monospace">2024-11-28</td>
-			    <td><a href="cookbook/stuffing.html">Stuffing</a></td>
-			   </tr>
-				 <tr>
- 			  	<td class="monospace">2024-12-16</td>
- 			    <td><a href="cookbook/cranberry_sauce.html">Cranberry Sauce</a></td>
- 			   </tr>
-			</table>
-			
-			<h1>Caribbean</h1>
-			<table id="blog-list">
-				<tr>
-			  	<td class="monospace">2024-12-02</td>
-			    <td><a href="cookbook/chicken_colombo.html">Chicken Colombo</a></td>
-			   </tr>
-			</table>
-			
-			<h1>Asian</h1>
-			<table id="blog-list">
-				<tr>
-			  	<td class="monospace">2024-12-06</td>
-			    <td><a href="cookbook/coconut_chicken.html">Coconut Chicken</a></td>
-			   </tr>
-			</table>
-			
-			<h1>Baking</h1>
-			<table id="blog-list">
-				<tr>
-			  	<td class="monospace">2025-05-26</td>
-			    <td><a href="cookbook/apple_coffee_cake.html">Apple Coffee Cake</a></td>
-			   </tr>
-			</table>
-			
+		<section class="recipe-categories">
+			<div class="category">
+				<h1>Thanksgiving</h1>
+				<table class="recipe-list">
+					<tr>
+				  	<td class="monospace">2024-11-28</td>
+				    <td><a href="cookbook/stuffing.html">Stuffing</a></td>
+				   </tr>
+					 <tr>
+	 			  	<td class="monospace">2024-12-16</td>
+	 			    <td><a href="cookbook/cranberry_sauce.html">Cranberry Sauce</a></td>
+	 			   </tr>
+				</table>
+			</div>
+
+			<div class="category">
+				<h1>Caribbean</h1>
+				<table class="recipe-list">
+					<tr>
+				  	<td class="monospace">2024-12-02</td>
+				    <td><a href="cookbook/chicken_colombo.html">Chicken Colombo</a></td>
+				   </tr>
+				</table>
+			</div>
+
+			<div class="category">
+				<h1>Asian</h1>
+				<table class="recipe-list">
+					<tr>
+				  	<td class="monospace">2024-12-06</td>
+				    <td><a href="cookbook/coconut_chicken.html">Coconut Chicken</a></td>
+				   </tr>
+				</table>
+			</div>
+
+			<div class="category">
+				<h1>Baking</h1>
+				<table class="recipe-list">
+					<tr>
+				  	<td class="monospace">2025-05-26</td>
+				    <td><a href="cookbook/apple_coffee_cake.html">Apple Coffee Cake</a></td>
+				   </tr>
+				</table>
+			</div>
 		</section>
 		<footer>
-			
+
 		</footer>
+
+		<script src="js/theme.js"></script>
+		<script src="js/cookbook.js"></script>
 	</body>
-	
+
 </html>

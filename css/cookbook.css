@@ -66,3 +66,202 @@ input[type="range"] {
     cursor: pointer;
     border: none;
   }
+
+/* RECIPE SEARCH */
+
+.search-wrap {
+	position: relative;
+	max-width: 400px;
+	margin: 20px auto;
+}
+
+#recipeSearch {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px 14px;
+	font-size: 16px;
+	font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	outline: none;
+}
+
+#recipeSearch:focus {
+	border-color: #2980b9;
+}
+
+.search-results {
+	position: absolute;
+	top: calc(100% + 4px);
+	left: 0;
+	right: 0;
+	z-index: 10;
+	margin: 0;
+	padding: 4px 0;
+	list-style: none;
+	background-color: #ffffff;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+	max-height: 280px;
+	overflow-y: auto;
+}
+
+.search-results li {
+	padding: 0;
+}
+
+.search-results a {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 8px 14px;
+	color: #333;
+	font-family: 'Noto Sans', Verdana, Helvetica, sans-serif;
+}
+
+.search-results li.active a,
+.search-results a:hover {
+	background-color: #f2f2f2;
+}
+
+.search-category {
+	flex-shrink: 0;
+	font-size: 0.85em;
+	color: #888;
+}
+
+/* RECIPE CATEGORIES */
+
+.recipe-categories .category {
+	break-inside: avoid;
+	page-break-inside: avoid;
+	-webkit-column-break-inside: avoid;
+	/* Padding (not margin) so spacing is never trimmed at a column break,
+	   which is what caused the right column to sit higher than the left. */
+	padding-top: 20px;
+}
+
+.recipe-categories h1 {
+	margin-top: 0;
+	font-size: 24px;
+	text-align: center;
+}
+
+@media (min-width: 700px) {
+	.recipe-categories {
+		column-count: 2;
+		column-gap: 40px;
+	}
+}
+
+.recipe-list .monospace {
+	color: grey;
+}
+
+.recipe-list a {
+	color: #000;
+}
+
+/* DARK MODE TOGGLE */
+
+.header-top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.theme-toggle {
+	background: none;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding: 4px 10px;
+	font-size: 16px;
+	line-height: 1.4;
+	cursor: pointer;
+}
+
+.theme-toggle:hover {
+	background-color: rgba(0,0,0,0.05);
+}
+
+/* DARK MODE THEME */
+
+[data-theme="dark"] body {
+	background-color: #1a1a1a;
+	color: #e0e0e0;
+}
+
+[data-theme="dark"] h1 {
+	color: #e67e22;
+}
+
+[data-theme="dark"] h2 {
+	color: #5dade2;
+}
+
+[data-theme="dark"] a {
+	color: #aaaaaa;
+}
+
+[data-theme="dark"] hr {
+	border-color: #444;
+}
+
+[data-theme="dark"] .ingredients,
+[data-theme="dark"] .instructions {
+	background-color: #2a2a2a;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+[data-theme="dark"] .theme-toggle {
+	border-color: #555;
+	color: #e0e0e0;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+	background-color: rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] input[type="range"] {
+	background: #444;
+}
+
+[data-theme="dark"] #recipeSearch {
+	background-color: #2a2a2a;
+	border-color: #555;
+	color: #e0e0e0;
+}
+
+[data-theme="dark"] #recipeSearch::placeholder {
+	color: #888;
+}
+
+[data-theme="dark"] .search-results {
+	background-color: #2a2a2a;
+	border-color: #555;
+	box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+[data-theme="dark"] .search-results a {
+	color: #e0e0e0;
+}
+
+[data-theme="dark"] .search-results li.active a,
+[data-theme="dark"] .search-results a:hover {
+	background-color: #3a3a3a;
+}
+
+[data-theme="dark"] .search-category {
+	color: #999;
+}
+
+[data-theme="dark"] .recipe-list .monospace {
+	color: #999;
+}
+
+[data-theme="dark"] .recipe-list a {
+	color: #e0e0e0;
+}
