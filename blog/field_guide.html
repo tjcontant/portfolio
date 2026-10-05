@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>A Field Guide to This Blog – Tristan Contant</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="A tour of every element a post on this blog can use.">
+	<link rel="stylesheet" type="text/css" href="../css/general_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/blog.css">
+	<!-- Math rendering (KaTeX). Remove these three tags on posts without math. -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+	<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+		onload="renderMathInElement(document.querySelector('.post-body'), {delimiters: [{left: '\\[', right: '\\]', display: true}, {left: '\\(', right: '\\)', display: false}]})"></script>
+	<script>
+		(function () {
+			try {
+				if (localStorage.getItem('cookbook-theme') === 'dark') {
+					document.documentElement.setAttribute('data-theme', 'dark');
+				}
+			} catch (e) { }
+		})();
+	</script>
+</head>
+
+<body>
+	<div class="reading-progress" aria-hidden="true"></div>
+
+	<header>
+		<div class="header-top">
+			<div id="title">Tristan's Blog</div>
+			<button type="button" id="darkModeToggle" class="theme-toggle"
+				aria-label="Switch to dark mode">Dark</button>
+		</div>
+		<ul class="horizontal-list" id="nav-bar">
+			<li><a href="../index.html">Home</a></li>
+			<li><a href="../cookbook.html">Cookbook</a></li>
+			<li><a href="../blog.html">Blog</a></li>
+		</ul>
+	</header>
+
+	<main>
+		<article>
+			<a class="back-link" href="../blog.html">← All posts</a>
+
+			<!-- POST HEADER: title, optional one-line "dek", and meta line. -->
+			<header class="post-header">
+				<h1>A Field Guide to This Blog</h1>
+				<p class="dek">Every element a post can use, demonstrated on a coin that may or may not be fair.</p>
+				<div class="post-meta">
+					<time class="monospace" datetime="2026-10-04">2026-10-04</time>
+					<span aria-hidden="true">·</span>
+					<span id="readingTime"></span>
+					<ul class="tag-list">
+						<li class="tag">meta</li>
+						<li class="tag">statistics</li>
+					</ul>
+				</div>
+			</header>
+
+			<!-- TABLE OF CONTENTS: filled in automatically from the post's h2s. Delete for short posts. -->
+			<nav class="card toc" aria-label="Table of contents">
+				<p class="toc-title">Contents</p>
+				<ol></ol>
+			</nav>
+
+			<div class="post-body">
+				<p>This post doubles as a style guide. Each section uses a different element—math, code, figures,
+					tables, callouts—so I can see how they look together before writing anything real. To keep it
+					from being pure filler, everything is in service of one question: <strong>how many times do you
+						need to flip a coin to know whether it's fair?</strong></p>
+
+				<h2>Text and Inline Elements</h2>
+				<p>Body text supports the usual inline formatting: <strong>bold</strong> for emphasis,
+					<em>italics</em> for terms or titles, <a href="../index.html">links</a>, and
+					<code>inline code</code> for function names like <code>rbinom()</code>. You can also
+					<mark>highlight a key phrase</mark>, mark something as <del>wrong</del> corrected, define an
+					abbreviation like <abbr title="maximum likelihood estimator">MLE</abbr> (hover it), or show a
+					keyboard shortcut such as <kbd>Cmd</kbd> + <kbd>Enter</kbd>.<sup><a class="fn-ref"
+							href="#fn1" id="fnref1">1</a></sup></p>
+
+				<p>Footnotes, like the one above, collect at the bottom of the post and link back to where they were
+					cited.</p>
+
+				<h3>Lists</h3>
+				<p>Unordered lists work for loose collections:</p>
+				<ul>
+					<li>A coin has some unknown probability \(p\) of landing heads.</li>
+					<li>We flip it \(n\) times and count the heads, \(X\).</li>
+					<li>We want to say something about \(p\) using only \(X\).
+						<ul>
+							<li>Nested items are indented one level.</li>
+							<li>And can mix in <code>code</code> or math like \(X \sim \text{Binomial}(n, p)\).</li>
+						</ul>
+					</li>
+				</ul>
+
+				<p>Ordered lists work for steps:</p>
+				<ol>
+					<li>Pick a sample size \(n\).</li>
+					<li>Flip the coin \(n\) times.</li>
+					<li>Estimate \(p\) with the proportion of heads.</li>
+				</ol>
+
+				<h2>Math</h2>
+				<p>Inline math sits inside a sentence: the natural estimate of \(p\) is \(\hat{p} = X / n\), the
+					fraction of flips that came up heads. Longer expressions get their own line:</p>
+
+				\[
+				\hat{p} = \frac{1}{n} \sum_{i=1}^{n} X_i, \qquad
+				\mathbb{E}[\hat{p}] = p, \qquad
+				\operatorname{Var}(\hat{p}) = \frac{p(1-p)}{n}.
+				\]
+
+				<p>Write inline math between <code>\(</code> and <code>\)</code>, and display math between
+					<code>\[</code> and <code>\]</code>. Anything LaTeX-like works.
+				</p>
+
+				<h3>Definitions, Theorems, and Proofs</h3>
+				<div class="math-env">
+					<p><span class="math-env-label">Definition 1.</span> An estimator \(\hat{\theta}_n\) is
+						<em>consistent</em> for \(\theta\) if, for every \(\varepsilon > 0\),
+						\(P(|\hat{\theta}_n - \theta| \geq \varepsilon) \to 0\) as \(n \to \infty\).</p>
+				</div>
+
+				<div class="math-env theorem">
+					<p><span class="math-env-label">Theorem 1 (Weak Law of Large Numbers).</span> The sample
+						proportion \(\hat{p}\) is a consistent estimator of \(p\).</p>
+				</div>
+
+				<div class="proof">
+					<p><em>Proof.</em> By Chebyshev's inequality, for any \(\varepsilon > 0\),</p>
+					\[
+					P(|\hat{p} - p| \geq \varepsilon)
+					\leq \frac{\operatorname{Var}(\hat{p})}{\varepsilon^2}
+					= \frac{p(1-p)}{n\varepsilon^2}
+					\leq \frac{1}{4n\varepsilon^2},
+					\]
+					<p>which goes to zero as \(n \to \infty\).</p>
+				</div>
+
+				<aside class="callout note">
+					<p class="callout-title">Note</p>
+					<p>Callouts come in three flavors. This blue <code>note</code> is for asides that add context
+						without being essential.</p>
+				</aside>
+
+				<aside class="callout tip">
+					<p class="callout-title">Tip</p>
+					<p>The green <code>tip</code> is for practical advice. Here: the bound \(1/(4n\varepsilon^2)\)
+						is worst-case, since \(p(1-p)\) is largest at \(p = 1/2\).</p>
+				</aside>
+
+				<aside class="callout warning">
+					<p class="callout-title">Watch out</p>
+					<p>The orange <code>warning</code> is for common mistakes. Consistency says nothing about how
+						fast \(\hat{p}\) converges—for that you need the variance.</p>
+				</aside>
+
+				<h2>Code</h2>
+				<p>Code blocks get a label (language or filename) and a copy button. Here's a simulation that flips
+					a fair coin at increasing sample sizes:</p>
+
+				<div class="code-block">
+					<div class="code-label"><span>coin_flips.R</span><button type="button"
+							class="code-copy">Copy</button></div>
+<pre><code>set.seed(2026)
+p &lt;- 0.5
+n &lt;- c(10, 100, 1000, 10000)
+
+estimates &lt;- sapply(n, function(k) mean(rbinom(k, size = 1, prob = p)))
+
+data.frame(
+  n         = n,
+  estimate  = estimates,
+  abs_error = abs(estimates - p),
+  std_error = sqrt(p * (1 - p) / n)
+)</code></pre>
+				</div>
+
+				<p>Short output can go in an unlabeled block. Leave out the label row entirely:</p>
+
+				<div class="code-block">
+<pre><code>&gt; mean(rbinom(1e6, 1, 0.5))
+[1] 0.500213</code></pre>
+				</div>
+
+				<h2>Tables</h2>
+				<p>Tables scroll sideways on narrow screens instead of breaking the layout. Numeric columns are
+					right-aligned with the <code>num</code> class so decimals line up.</p>
+
+				<div class="table-wrap">
+					<table class="data-table">
+						<caption>Table 1. Example output from the simulation above. Your numbers will differ with
+							a different seed.</caption>
+						<thead>
+							<tr>
+								<th class="num">\(n\)</th>
+								<th class="num">Estimate \(\hat{p}\)</th>
+								<th class="num">Absolute error</th>
+								<th class="num">Std. error</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="num">10</td>
+								<td class="num">0.700</td>
+								<td class="num">0.200</td>
+								<td class="num">0.158</td>
+							</tr>
+							<tr>
+								<td class="num">100</td>
+								<td class="num">0.460</td>
+								<td class="num">0.040</td>
+								<td class="num">0.050</td>
+							</tr>
+							<tr>
+								<td class="num">1,000</td>
+								<td class="num">0.509</td>
+								<td class="num">0.009</td>
+								<td class="num">0.016</td>
+							</tr>
+							<tr>
+								<td class="num">10,000</td>
+								<td class="num">0.497</td>
+								<td class="num">0.003</td>
+								<td class="num">0.005</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<p class="pull-quote">Ten flips can't tell a fair coin from a 70/30 one. Ten thousand can.</p>
+
+				<p>A pull quote, like the one above, breaks up a long stretch of text and highlights the main
+					takeaway. Use it sparingly—once per post at most.</p>
+
+				<h2>Figures</h2>
+				<p>A single figure spans the text column, with a caption underneath:</p>
+
+				<figure>
+					<img src="../img/placehold_600x400.jpeg" alt="Placeholder for a plot of running estimates"
+						loading="lazy">
+					<figcaption>Figure 1. Running estimate of \(p\) across 1,000 flips. Swap in a real plot.
+					</figcaption>
+				</figure>
+
+				<p>Two figures can sit side by side and share one caption (they stack on phones):</p>
+
+				<figure class="figure-grid">
+					<img src="../img/placehold_600x400.jpeg" alt="Placeholder for a histogram at n = 10"
+						loading="lazy">
+					<img src="../img/placehold_600x400.jpeg" alt="Placeholder for a histogram at n = 1000"
+						loading="lazy">
+					<figcaption>Figure 2. Sampling distribution of \(\hat{p}\) at \(n = 10\) (left) and \(n =
+						1000\) (right).</figcaption>
+				</figure>
+
+				<p>And a <code>wide</code> figure breaks out of the column on large screens, for plots that need
+					the room:</p>
+
+				<figure class="wide">
+					<img src="../img/placehold_600x400.jpeg" alt="Placeholder for a wide multi-panel plot"
+						loading="lazy">
+					<figcaption>Figure 3. A wide figure.</figcaption>
+				</figure>
+
+				<hr class="section-break">
+
+				<h2>Quotes and Asides</h2>
+				<p>Block quotes are for quoting someone else at length, with an optional citation:</p>
+
+				<blockquote>
+					<p>All models are wrong, but some are useful.</p>
+					<cite>— George E. P. Box</cite>
+				</blockquote>
+
+				<p>The three asterisks above this section are a section break (<code>&lt;hr
+						class="section-break"&gt;</code>), useful for a change of scene without a new
+					heading.<sup><a class="fn-ref" href="#fn2" id="fnref2">2</a></sup></p>
+
+				<h3>Collapsible Sections</h3>
+				<p>Collapsible blocks hide content until it's wanted: exercise solutions, long derivations, or
+					full session info.</p>
+
+				<details>
+					<summary>Exercise: how many flips for a margin of error of 0.01?</summary>
+					<p>Using the worst case \(p = 1/2\) and a 95% normal approximation, we need
+						\(1.96 \sqrt{0.25 / n} \leq 0.01\), so</p>
+					\[ n \geq \left(\frac{1.96 \times 0.5}{0.01}\right)^2 \approx 9{,}604. \]
+					<p>Roughly ten thousand flips, which matches the table.</p>
+				</details>
+
+				<details>
+					<summary>Session info</summary>
+					<div class="code-block">
+<pre><code>R version 4.4.1
+Platform: aarch64-apple-darwin20
+attached base packages: stats graphics utils</code></pre>
+					</div>
+				</details>
+
+				<h2>Wrapping Up</h2>
+				<p>That's every element. Posts end with footnotes (if any), then the tags and links to the
+					neighboring posts.</p>
+
+				<!-- FOOTNOTES: each <li id="fnN"> pairs with a <sup><a id="fnrefN" href="#fnN"> in the text. -->
+				<section class="footnotes" aria-label="Footnotes">
+					<ol>
+						<li id="fn1">That shortcut runs the current line in RStudio. <a class="fn-back"
+								href="#fnref1" aria-label="Back to text">↩</a></li>
+						<li id="fn2">Footnotes can hold <em>formatting</em>, <a href="../blog.html">links</a>, and
+							math like \(\sqrt{n}\). <a class="fn-back" href="#fnref2"
+								aria-label="Back to text">↩</a></li>
+					</ol>
+				</section>
+			</div>
+
+			<!-- POST FOOTER: tags plus previous/next posts. Drop either link when there's no neighbor. -->
+			<footer class="post-footer">
+				<ul class="tag-list">
+					<li class="tag">meta</li>
+					<li class="tag">statistics</li>
+				</ul>
+				<nav class="post-nav" aria-label="More posts">
+					<a class="card prev" href="field_guide.html">
+						<span class="post-nav-label">← Previous</span>
+						<span class="post-nav-title">Real Analysis 1: Sets</span>
+					</a>
+				</nav>
+				<p><a href="#">Back to top ↑</a></p>
+			</footer>
+		</article>
+	</main>
+
+	<script src="../js/theme.js"></script>
+	<script src="../js/blog.js"></script>
+</body>
+
+</html>

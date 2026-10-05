@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<title>Blog – Tristan Contant</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/general_style.css">
+	<link rel="stylesheet" type="text/css" href="css/blog.css">
+	<script>
+		(function () {
+			try {
+				if (localStorage.getItem('cookbook-theme') === 'dark') {
+					document.documentElement.setAttribute('data-theme', 'dark');
+				}
+			} catch (e) { }
+		})();
+	</script>
+</head>
+
+<body>
+	<header>
+		<div class="header-top">
+			<div id="title">Tristan's Blog</div>
+			<button type="button" id="darkModeToggle" class="theme-toggle"
+				aria-label="Switch to dark mode">Dark</button>
+		</div>
+		<ul class="horizontal-list" id="nav-bar">
+			<li><a href="index.html">Home</a></li>
+			<li><a href="cookbook.html">Cookbook</a></li>
+			<li><a href="blog.html">Blog</a></li>
+		</ul>
+	</header>
+
+	<p>Writing on statistics, mathematics, grad school, and whatever else I can't stop thinking about. Posts are
+		listed newest first; use the tags to narrow things down.</p>
+
+	<!-- FEATURED: the most recent (or a pinned) post. -->
+	<article class="card featured-post">
+		<p class="eyebrow">Latest post</p>
+		<h2><a href="blog/field_guide.html">A Field Guide to This Blog</a></h2>
+		<div class="post-meta">
+			<time class="monospace" datetime="2026-10-04">2026-10-04</time>
+			<ul class="tag-list">
+				<li class="tag">meta</li>
+				<li class="tag">statistics</li>
+			</ul>
+		</div>
+		<p class="excerpt">A tour of every element a post here can use: math, code, figures, tables, callouts,
+			footnotes, and more, using a small coin-flipping example to tie it all together.</p>
+		<a class="read-more" href="blog/field_guide.html">Read the post →</a>
+	</article>
+
+	<hr>
+
+	<!-- TAG FILTER: one button per tag; data-tag must match the values in each post's data-tags. -->
+	<div class="blog-filter" role="group" aria-label="Filter posts by tag">
+		<span class="muted">Filter:</span>
+		<button type="button" class="tag" data-tag="all" aria-pressed="true">all</button>
+		<button type="button" class="tag" data-tag="statistics" aria-pressed="false">statistics</button>
+		<button type="button" class="tag" data-tag="math" aria-pressed="false">math</button>
+		<button type="button" class="tag" data-tag="grad-school" aria-pressed="false">grad school</button>
+		<button type="button" class="tag" data-tag="meta" aria-pressed="false">meta</button>
+	</div>
+
+	<!-- ARCHIVE: one .year-group per year, newest first. -->
+	<section class="year-group">
+		<h1>2026</h1>
+		<ul class="post-list">
+			<li data-tags="meta statistics">
+				<time class="monospace" datetime="2026-10-04">2026-10-04</time>
+				<div>
+					<a class="post-title" href="blog/field_guide.html">A Field Guide to This Blog</a>
+					<p>Every element a post can use, demonstrated on a coin-flipping example.</p>
+					<ul class="tag-list">
+						<li class="tag">meta</li>
+						<li class="tag">statistics</li>
+					</ul>
+				</div>
+			</li>
+			<!-- PLACEHOLDER: example entry to show how the list looks with several posts. Delete when real posts exist. -->
+			<li data-tags="math">
+				<time class="monospace" datetime="2026-09-20">2026-09-20</time>
+				<div>
+					<a class="post-title" href="blog/field_guide.html">Real Analysis 1: Sets</a>
+					<p>Math is more creative than "crunching numbers." A first look at sets, subsets, and the size of
+						infinity.</p>
+					<ul class="tag-list">
+						<li class="tag">math</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</section>
+
+	<section class="year-group">
+		<h1>2025</h1>
+		<ul class="post-list">
+			<!-- PLACEHOLDER: example entry. Delete when real posts exist. -->
+			<li data-tags="grad-school statistics">
+				<time class="monospace" datetime="2025-08-15">2025-08-15</time>
+				<div>
+					<a class="post-title" href="blog/field_guide.html">Two Years of a Stats MS, in Review</a>
+					<p>What I'd tell myself on day one, from coursework to quals to finding a research group.</p>
+					<ul class="tag-list">
+						<li class="tag">grad school</li>
+						<li class="tag">statistics</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</section>
+
+	<p class="no-results" hidden>No posts with that tag yet.</p>
+
+	<footer>
+	</footer>
+
+	<script src="js/theme.js"></script>
+	<script src="js/blog.js"></script>
+</body>
+
+</html>
