@@ -1,5 +1,29 @@
 // Shared rendering logic for cookbook recipe pages.
 // See cookbook/_template.html for the expected config shape.
+
+// Name of the Apple Shortcut that adds its text input to the Reminders
+// grocery list. Must match the shortcut's name in the Shortcuts app exactly.
+const GROCERY_SHORTCUT_NAME = 'Add to Grocery List';
+
+// Plus button shown on hover that sends an ingredient to Apple Reminders
+// by running the grocery shortcut through the shortcuts:// URL scheme.
+function createGroceryButton(text) {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'grocery-add';
+  button.textContent = '+';
+  button.title = 'Add to grocery list';
+  button.setAttribute('aria-label', `Add ${text} to grocery list`);
+  button.addEventListener('click', function () {
+    window.location.href = 'shortcuts://run-shortcut?name='
+      + encodeURIComponent(GROCERY_SHORTCUT_NAME)
+      + '&input=text&text=' + encodeURIComponent(text);
+    button.textContent = '✓';
+    button.classList.add('added');
+  });
+  return button;
+}
+
 function renderRecipe(config) {
   const { servings, sections } = config;
 
@@ -35,7 +59,9 @@ function renderRecipe(config) {
       list.innerHTML = '';
       section.items.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = renderItem(item, currentServings);
+        const text = renderItem(item, currentServings);
+        li.textContent = text;
+        li.appendChild(createGroceryButton(text));
         list.appendChild(li);
       });
     });
@@ -58,3 +84,13 @@ function renderRecipe(config) {
     renderAll(null);
   }
 }
+
+// Click an instruction step to cross it off as you cook.
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.instructions li').forEach(function (li) {
+    li.classList.add('step-toggle');
+    li.addEventListener('click', function () {
+      li.classList.toggle('step-done');
+    });
+  });
+});
